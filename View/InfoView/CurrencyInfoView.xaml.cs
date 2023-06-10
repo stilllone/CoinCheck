@@ -21,13 +21,8 @@ namespace CoinCheck.View.InfoView
     /// </summary>
     public partial class CurrencyInfoView : UserControl
     {
-        private CurrencyInfoViewModel ViewModel
+        public CurrencyInfoView()
         {
-            get;
-        }
-        public CurrencyInfoView(CurrencyInfoViewModel viewModel)
-        {
-            ViewModel = viewModel;
             InitializeComponent();
         }
     }

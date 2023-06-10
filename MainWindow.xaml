@@ -13,6 +13,18 @@
             <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ContentControl Content="{Binding CurrentView}" Grid.Column="1"/>
+
+        <StackPanel>
+            <Button Content="Currencies"
+                    Height="20" Width="70"
+                    Command="{Binding NavigateCurrenciesCommand}"
+                    />
+            <Button Content="Home"
+                    Height="20" Width="70"
+                    Command="{Binding NavigateCurrenciesCommand}"
+                    />
+
+        </StackPanel>
+        <ContentControl Content="{Binding Path = Navigation.CurrentView}" Grid.Column="1"/>
     </Grid>
 </Window>

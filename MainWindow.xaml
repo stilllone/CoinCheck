@@ -4,27 +4,43 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoinCheck" 
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
+        xmlns:helpers="clr-namespace:CoinCheck.Helpers"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <helpers:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Grid Background="#606060">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Button  Panel.ZIndex="1" Content="☰" x:Name="HamburgerButton" Height="30" Width="30" VerticalAlignment="Top"
+                Command="{Binding ToggleHamburgerCommand}" Grid.Column="0" HorizontalAlignment="Left"/>
+        <Border  Grid.Column="0" Grid.Row="1"
+              Visibility="{Binding IsHamburgerOpen, Converter={StaticResource booleanToVisibilityConverter}}">
 
-        <StackPanel>
-            <Button Content="Currencies"
-                    Height="20" Width="70"
-                    Command="{Binding NavigateCurrenciesCommand}"
-                    />
-            <Button Content="Home"
-                    Height="20" Width="70"
-                    Command="{Binding NavigateCurrenciesCommand}"
-                    />
+            <DockPanel LastChildFill="True" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                <StackPanel DockPanel.Dock="Bottom" Margin="10">
+                    <controls:ToggleSwitch Header="Theme"  Foreground="{Binding}"
+                        OffContent="Do work"
+                        OnContent="Working"/>
+                </StackPanel>
+                <StackPanel Margin="0 40 0 0" Orientation="Vertical">
+                    <Button Style="{Binding }" Content="Currencies" Height="20" Width="Auto" 
+                            Command="{Binding NavigateCurrenciesCommand}" />
 
-        </StackPanel>
+                    <Button Style="{Binding }" Content="Home" Height="20" Width="Auto"
+                            Command="{Binding NavigateCurrenciesCommand}" />
+                </StackPanel>
+
+            </DockPanel>
+        </Border>
+        
         <ContentControl Content="{Binding Path = Navigation.CurrentView}" Grid.Column="1"/>
     </Grid>
 </Window>

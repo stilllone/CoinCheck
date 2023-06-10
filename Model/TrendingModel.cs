@@ -1,13 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media.Imaging;
 
 namespace CoinCheck.Model
 {
+    [JsonObject]
     public partial class TrendingModel : ObservableRecipient
     {
         [ObservableProperty]
@@ -26,7 +30,9 @@ namespace CoinCheck.Model
         private int? marketCapRank;
 
         [ObservableProperty]
-        private Thumb? thumb; //make it convert in model from url
+        private string? thumbUrl;
+
+        public BitmapImage? Image => new BitmapImage(new Uri(thumbUrl));
 
         [ObservableProperty]
         private string? slug;

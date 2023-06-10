@@ -21,21 +21,21 @@
         </Grid.ColumnDefinitions>
         <Button  Panel.ZIndex="1" Content="☰" x:Name="HamburgerButton" Height="30" Width="30" VerticalAlignment="Top"
                 Command="{Binding ToggleHamburgerCommand}" Grid.Column="0" HorizontalAlignment="Left"/>
-        <Border  Grid.Column="0" Grid.Row="1"
+        <Border  Grid.Column="0" Grid.Row="1" Style="{Binding }"
               Visibility="{Binding IsHamburgerOpen, Converter={StaticResource booleanToVisibilityConverter}}">
 
             <DockPanel LastChildFill="True" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                 <StackPanel DockPanel.Dock="Bottom" Margin="10">
                     <controls:ToggleSwitch Header="Theme"  Foreground="{Binding}"
-                        OffContent="Do work"
-                        OnContent="Working"/>
+                        OffContent="Dark"
+                        OnContent="Light"/>
                 </StackPanel>
                 <StackPanel Margin="0 40 0 0" Orientation="Vertical">
                     <Button Style="{Binding }" Content="Currencies" Height="20" Width="Auto" 
                             Command="{Binding NavigateCurrenciesCommand}" />
 
-                    <Button Style="{Binding }" Content="Home" Height="20" Width="Auto"
-                            Command="{Binding NavigateCurrenciesCommand}" />
+                    <Button Style="{Binding }" Content="Trending" Height="20" Width="Auto"
+                            Command="{Binding NavigateTrendingCommand}" />
                 </StackPanel>
 
             </DockPanel>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CoinCheck.ViewModel
 {
-    public class CompareViewModel
+    public class CompareViewModel : DataProvider.ViewModel
     {
+        //get a list of all criptocurrencies and data of it
     }
 }

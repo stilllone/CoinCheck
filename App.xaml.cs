@@ -24,6 +24,7 @@ namespace CoinCheck
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<CurrencyInfoViewModel>();
             services.AddSingleton<TopCurrencyViewModel>();
+            services.AddSingleton<TrendingViewModel>();
 
 
             services.AddSingleton<INavigationService, NavigationService>();

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CoinCheck.ViewModel
 {
-    public partial class ConvertCoinViewModel : ObservableRecipient
+    public partial class ConvertCoinViewModel : DataProvider.ViewModel
     {
-
+        //https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=btc%2Ceth%2Cltc
+        //simple/price
     }
 }

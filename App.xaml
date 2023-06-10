@@ -11,6 +11,10 @@
             <view:MainView/>
         </DataTemplate>
         
+        <DataTemplate DataType="{x:Type viewmodel:TrendingViewModel}">
+            <view:TrendingView/>
+        </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewmodel:CurrencyInfoViewModel}">
             <infoview:CurrencyInfoView/>
         </DataTemplate>

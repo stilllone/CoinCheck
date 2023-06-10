@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace CoinCheck.ViewModel
 {
-    public partial class CurrencyInfoViewModel : ObservableRecipient
+    public partial class CurrencyInfoViewModel : DataProvider.ViewModel
     {
         public CurrencyInfoViewModel(string coinName) 
         {
@@ -16,7 +16,8 @@ namespace CoinCheck.ViewModel
 
         private void GetInfoByName(string coinName)
         {
-            //get by name and find, them show info
+            //get by name and find, then show info
+            //can be get from coins/markets
         }
     }
 }

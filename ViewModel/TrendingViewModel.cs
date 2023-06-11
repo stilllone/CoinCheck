@@ -30,7 +30,7 @@ namespace CoinCheck.ViewModel
                 var response = await client.GetAsync("https://api.coingecko.com/api/v3/search/trending");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
-                trendingCollection = FillCollection(jsonRequest);
+                TrendingCollection = FillCollection(jsonRequest);
             }
         }
 

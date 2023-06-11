@@ -1,11 +1,17 @@
-﻿using CoinCheck.View.InfoView;
+﻿using CoinCheck.Model;
+using CoinCheck.View.InfoView;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.Http;
+using System.Text.Json;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CoinCheck.ViewModel
@@ -26,7 +32,7 @@ namespace CoinCheck.ViewModel
             {
                 new LineSeries
                 {
-                    Values = GetDataChart(),
+                    Values = null,
                     Fill = gradientBrush,
                     StrokeThickness = 1,
                     PointGeometrySize = 0
@@ -67,12 +73,19 @@ namespace CoinCheck.ViewModel
         public Func<double, string> XFormatter { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
-        private ChartValues<DateTimePoint> GetDataChart()
-        {
-            var values = new ChartValues<DateTimePoint>();
 
-            return values;
-        }
+        [ObservableProperty]
+        private ChartValues<ChartModel> chartData;
         #endregion
+
+        private async void FillChart()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://api.coingecko.com/api/v3/search/trending");
+                response.EnsureSuccessStatusCode();
+                string? jsonRequest = await response.Content.ReadAsStringAsync();
+            }
+        }
     }
 }

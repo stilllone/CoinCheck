@@ -18,90 +18,63 @@ namespace CoinCheck.Model
         [JsonProperty("id")]
         public string id;
 
-        [ObservableProperty]
         [JsonProperty("symbol")]
+        [ObservableProperty]
         public string symbol;
 
-        [ObservableProperty]
         [JsonProperty("name")]
+        [ObservableProperty]
         public string coinName;
 
         [JsonProperty("image")]
         [ObservableProperty]
         public string? imageUri;
-        
+
         public BitmapImage? Image => new(new Uri(imageUri));
 
-        [ObservableProperty]
         [JsonProperty("current_price")]
+        [ObservableProperty]
         public decimal currentPrice;
 
-        [ObservableProperty]
         [JsonProperty("market_cap")]
+        [ObservableProperty]
         public long marketCap;
-
-        [ObservableProperty]
         [JsonProperty("market_cap_rank")]
+        [ObservableProperty]
+
         public int marketCapRank;
-
-        [ObservableProperty]
         [JsonProperty("fully_diluted_valuation")]
-        public long fullyDilutedValuation;
-
         [ObservableProperty]
+
+        public long fullyDilutedValuation;
         [JsonProperty("total_volume")]
+        [ObservableProperty]
         public long totalVolume;
 
-        [ObservableProperty]
         [JsonProperty("high_24h")]
+        [ObservableProperty]
         public decimal high24h;
 
-        [ObservableProperty]
         [JsonProperty("low_24h")]
+        [ObservableProperty]
         public decimal low24h;
 
-        [ObservableProperty]
         [JsonProperty("price_change_24h")]
+        [ObservableProperty]
         public decimal priceChange24h;
 
-        [ObservableProperty]
         [JsonProperty("price_change_percentage_24h")]
+        [ObservableProperty]
         public decimal priceChangePercentage24h;
 
-        [ObservableProperty]
         [JsonProperty("market_cap_change_24h")]
+        [ObservableProperty]
         public decimal marketCapChange24h;
 
-        [ObservableProperty]
         [JsonProperty("market_cap_change_percentage_24h")]
+        [ObservableProperty]
         public decimal marketCapChangePercentage24h;
 
-        [ObservableProperty]
-        [JsonProperty("circulating_supply")]
-        public decimal circulatingSupply;
 
-        [ObservableProperty]
-        [JsonProperty("total_supply")]
-        public decimal totalSupply;
-
-        [ObservableProperty]
-        [JsonProperty("max_supply")]
-        public decimal maxSupply;
-
-        [ObservableProperty]
-        [JsonProperty("ath")]
-        public decimal ath;
-
-        [ObservableProperty]
-        [JsonProperty("ath_change_percentage")]
-        public decimal athChangePercentage;
-
-        [ObservableProperty]
-        [JsonProperty("atl")]
-        public decimal atl;
-
-        [ObservableProperty]
-        [JsonProperty("atl_change_percentage")]
-        public decimal atlChangePercentage;
     }
 }

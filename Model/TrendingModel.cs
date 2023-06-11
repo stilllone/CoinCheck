@@ -14,42 +14,43 @@ namespace CoinCheck.Model
     [JsonObject]
     public partial class TrendingModel : ObservableRecipient
     {
-        [ObservableProperty]
         [JsonProperty("id")]
+        [ObservableProperty]
         private string? id;
 
-        [ObservableProperty]
         [JsonProperty("coin_id")]
+        [ObservableProperty]
         private int? coinId;
 
-        [ObservableProperty]
         [JsonProperty("name")]
+        [ObservableProperty]
         private string? name;
 
-        [ObservableProperty]
         [JsonProperty("symbol")]
+        [ObservableProperty]
         private string? symbol;
 
-        [ObservableProperty]
         [JsonProperty("market_cap_rank")]
+        [ObservableProperty]
         private int? marketCapRank;
 
-        [ObservableProperty]
         [JsonProperty("thumb")]
+        [ObservableProperty]
         private string? thumbUrl;
 
         public BitmapImage? Image => new BitmapImage(new Uri(thumbUrl));
 
-        [ObservableProperty]
         [JsonProperty("slug")]
+        [ObservableProperty]
         private string? slug;
 
-        [ObservableProperty]
         [JsonProperty("price_btc")]
+        [ObservableProperty]
+
         private decimal? priceBtc;
 
-        [ObservableProperty]
         [JsonProperty("rank_in_trend")]
+        [ObservableProperty]
         private decimal? rankInTrend;
     }
 }

@@ -36,6 +36,8 @@
 
                     <Button Style="{Binding }" Content="Trending" Height="20" Width="Auto"
                             Command="{Binding NavigateTrendingCommand}" />
+                    <Button Style="{Binding }" Content="InfoView" Height="20" Width="Auto"
+                            Command="{Binding NavigateInfoCommand}" />
                 </StackPanel>
 
             </DockPanel>

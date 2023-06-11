@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,6 @@ namespace CoinCheck.View.InfoView
         {
             InitializeComponent();
         }
+
     }
 }

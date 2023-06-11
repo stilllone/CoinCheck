@@ -4,21 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:control="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
+             xmlns:uc="clr-namespace:CoinCheck.View.InfoView"
              xmlns:local="clr-namespace:CoinCheck.View.InfoView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewmodel:CurrencyDetailViewModel/>
+    </UserControl.DataContext>
     <Grid Background="AliceBlue">
         <control:MetroTabControl>
             <control:MetroTabItem Header="Info">
-
+                <uc:CurrencyDetailInfoView/>
             </control:MetroTabItem>
 
             <control:MetroTabItem Header="Chart">
-
+                <uc:ChartView/>
             </control:MetroTabItem>
 
             <control:MetroTabItem  Header="Convert">
-
+                <uc:ConvertView/>
             </control:MetroTabItem>
         </control:MetroTabControl>
     </Grid>

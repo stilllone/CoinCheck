@@ -27,6 +27,9 @@ namespace CoinCheck.ViewModel
         public void NavigateTrending() => Navigation.NavigateTo<TrendingViewModel>();
 
         [RelayCommand]
+        public void NavigateInfo() => Navigation.NavigateTo<CurrencyDetailViewModel>();
+
+        [RelayCommand]
         public void OnToggleHamburger() => IsHamburgerOpen = !IsHamburgerOpen;
 
         [ObservableProperty]

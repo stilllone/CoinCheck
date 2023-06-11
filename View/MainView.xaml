@@ -5,11 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
              xmlns:local="clr-namespace:CoinCheck.View"
+             d:DataContext="{d:DesignInstance Type=viewmodel:TopCurrencyViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodel:TopCurrencyViewModel/>
-    </UserControl.DataContext>
     <Grid Background="#606060">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>

@@ -22,7 +22,7 @@ namespace CoinCheck.ViewModel
         {
             Task.Run(() => GetListOfSupportedCurrecies());
         }
-        [RelayCommand]
+        //need to update
         public async void ConvertCurrency(string coinId, string intoCurrency)
         {
             using (HttpClient client = new()

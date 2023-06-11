@@ -22,7 +22,7 @@ namespace CoinCheck
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<CurrencyInfoViewModel>();
+            services.AddSingleton<CurrencyDetailViewModel>();
             services.AddSingleton<TopCurrencyViewModel>();
             services.AddSingleton<TrendingViewModel>();
 

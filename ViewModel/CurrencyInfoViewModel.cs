@@ -6,6 +6,8 @@ namespace CoinCheck.ViewModel
 {
     public partial class CurrencyInfoViewModel : DataProvider.ViewModel
     {
+
+        //coins/id
         public CurrencyInfoViewModel(string coinName) 
         {
             this.coinName = coinName;

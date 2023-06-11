@@ -3,10 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:control="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:CoinCheck.View.InfoView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <TextBlock Text="Currency"/>
+        <control:MetroTabControl>
+            <control:MetroTabItem Header="Info">
+
+            </control:MetroTabItem>
+
+            <control:MetroTabItem Header="Chart">
+
+            </control:MetroTabItem>
+
+            <control:MetroTabItem  Header="Convert">
+
+            </control:MetroTabItem>
+        </control:MetroTabControl>
     </Grid>
 </UserControl>

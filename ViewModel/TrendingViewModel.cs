@@ -16,7 +16,6 @@ namespace CoinCheck.ViewModel
 {
     public partial class TrendingViewModel : DataProvider.ViewModel
     {
-       
         //https://api.coingecko.com/api/v3/search/trending
         //search/trending
         public TrendingViewModel()
@@ -31,7 +30,7 @@ namespace CoinCheck.ViewModel
                 var response = await client.GetAsync("https://api.coingecko.com/api/v3/search/trending");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
-                TrendingCollection = FillCollection(jsonRequest);
+                trendingCollection = FillCollection(jsonRequest);
             }
         }
 

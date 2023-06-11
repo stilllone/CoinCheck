@@ -21,7 +21,8 @@ namespace CoinCheck.ViewModel
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Clear();
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.coingecko.com//api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en&precision=4");
+                HttpRequestMessage requestMessage = new (HttpMethod.Get, 
+                "https://api.coingecko.com//api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en&precision=4");
 
                 requestMessage.Headers.Add("User-Agent", "User-Agent-Here");
                 HttpResponseMessage response = await client.SendAsync(requestMessage);
@@ -29,7 +30,6 @@ namespace CoinCheck.ViewModel
 
                 string jsonOfRequest = await response.Content.ReadAsStringAsync();
                 TopCurrencyCollection = JsonConvert.DeserializeObject<ObservableCollection<CoinModel>>(jsonOfRequest);
-
             }
         }
 

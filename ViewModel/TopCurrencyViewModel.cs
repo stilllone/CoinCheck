@@ -31,14 +31,6 @@ namespace CoinCheck.ViewModel
                 TopCurrencyCollection = JsonConvert.DeserializeObject<ObservableCollection<CoinModel>>(jsonOfRequest);
 
             }
-            //using (HttpClient client = new HttpClient())
-            //{
-            //    var response = await client.GetAsync("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en");
-            //    response.EnsureSuccessStatusCode();
-            //    string? jsonOfRequest = await response.Content.ReadAsStringAsync();
-            //    TopCurrencyCollection = JsonConvert.DeserializeObject<ObservableCollection<CoinModel>>(jsonOfRequest);
-            //}
-
         }
 
         [ObservableProperty]

@@ -85,7 +85,7 @@ namespace CoinCheck.ViewModel
 
         private void FillChart(string? json)
         {
-            ChartPrices pricesData = JsonConvert.DeserializeObject<ChartPrices>(json);
+            ChartModel pricesData = JsonConvert.DeserializeObject<ChartModel>(json);
 
             foreach (List<double> price in pricesData.Prices)
             {
@@ -100,10 +100,11 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new())
             {
-                var response = await client.GetAsync("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7&interval=daily");
+                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinName}/market_chart?vs_currency=usd&days=7&interval=daily");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
-                FillChart(jsonRequest);
+                if (jsonRequest != null)
+                    FillChart(jsonRequest);
             }
         }
     }

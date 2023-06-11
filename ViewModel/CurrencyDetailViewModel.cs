@@ -89,9 +89,7 @@ namespace CoinCheck.ViewModel
 
             foreach (List<double> price in pricesData.Prices)
             {
-                long timestamp = (long)price[0];
-                double value = price[1];
-                DateTimePoint dateTimePoint = new DateTimePoint(DateTime.FromBinary(timestamp), value);
+                DateTimePoint dateTimePoint = new DateTimePoint(DateTime.FromBinary((long)price[0]), price[1]);
                 chartData.Add(dateTimePoint);
             }
         }

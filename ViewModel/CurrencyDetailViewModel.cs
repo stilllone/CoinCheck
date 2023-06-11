@@ -5,14 +5,18 @@ using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using static CoinCheck.Model.ChartModel;
 
 namespace CoinCheck.ViewModel
 {
@@ -20,8 +24,9 @@ namespace CoinCheck.ViewModel
     {
         public CurrencyDetailViewModel()
         {
-            //chart
+            Task.Run(()=> GetDataForChart());
 
+            //chart
             var gradientBrush = new LinearGradientBrush
             {
                 StartPoint = new Point(0, 0),
@@ -32,13 +37,13 @@ namespace CoinCheck.ViewModel
             {
                 new LineSeries
                 {
-                    Values = null,
+                    Values = chartData,
                     Fill = gradientBrush,
                     StrokeThickness = 1,
                     PointGeometrySize = 0
                 }
             };
-            XFormatter = val => new DateTime((long)val).ToString("dd MMM");
+            XFormatter = val => new DateTime((long)val).ToString("dd");
             YFormatter = val => val.ToString("C");
         }
         //coins/id
@@ -75,16 +80,30 @@ namespace CoinCheck.ViewModel
 
 
         [ObservableProperty]
-        private ChartValues<ChartModel> chartData;
+        private ChartValues<DateTimePoint> chartData = new();
         #endregion
 
-        private async void FillChart()
+        private void FillChart(string? json)
         {
-            using (HttpClient client = new HttpClient())
+            ChartPrices pricesData = JsonConvert.DeserializeObject<ChartPrices>(json);
+
+            foreach (List<double> price in pricesData.Prices)
             {
-                var response = await client.GetAsync("https://api.coingecko.com/api/v3/search/trending");
+                long timestamp = (long)price[0];
+                double value = price[1];
+                DateTimePoint dateTimePoint = new DateTimePoint(DateTime.FromBinary(timestamp), value);
+                chartData.Add(dateTimePoint);
+            }
+        }
+
+        private async void GetDataForChart()
+        {
+            using (HttpClient client = new())
+            {
+                var response = await client.GetAsync("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7&interval=daily");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
+                FillChart(jsonRequest);
             }
         }
     }

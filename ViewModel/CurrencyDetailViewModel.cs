@@ -1,4 +1,5 @@
-﻿using CoinCheck.Model;
+﻿using CoinCheck.Interfaces;
+using CoinCheck.Model;
 using CoinCheck.View.InfoView;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LiveCharts;
@@ -26,6 +27,8 @@ namespace CoinCheck.ViewModel
         //coins/id
         public CurrencyDetailViewModel()
         {
+
+            //loading info
             Task.Run(()=> GetDataForChart());
             Task.Run(() => GetCoinDetailInfo());
 
@@ -52,7 +55,7 @@ namespace CoinCheck.ViewModel
         
 
         [ObservableProperty]
-        private string coinName = "bitcoin";
+        private string coinName;
         #region charts
         [ObservableProperty]
         private ZoomingOptions zoomingMode;

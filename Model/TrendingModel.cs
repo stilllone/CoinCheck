@@ -24,7 +24,7 @@ namespace CoinCheck.Model
 
         [JsonProperty("name")]
         [ObservableProperty]
-        private string? name;
+        private string? coinName;
 
         [JsonProperty("symbol")]
         [ObservableProperty]
@@ -46,10 +46,9 @@ namespace CoinCheck.Model
 
         [JsonProperty("price_btc")]
         [ObservableProperty]
-
         private decimal? priceBtc;
 
-        [JsonProperty("rank_in_trend")]
+        [JsonProperty("score")]
         [ObservableProperty]
         private decimal? rankInTrend;
     }

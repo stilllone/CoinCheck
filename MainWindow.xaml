@@ -40,8 +40,9 @@
 
                     <Button Style="{Binding }" Content="Trending" Height="20" Width="Auto"
                             Command="{Binding NavigateTrendingCommand}" />
-                    <Button Style="{Binding }" Content="InfoView" Height="20" Width="Auto"
-                            Command="{Binding NavigateInfoCommand}" />
+                    
+                    <Button Style="{Binding }" Content="Search" Height="20" Width="Auto"
+                            Command="{Binding NavigateSearchCommand}" />
                 </StackPanel>
 
             </DockPanel>

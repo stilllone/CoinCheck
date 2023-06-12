@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,7 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new())
             {
-                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/search?query={request}");
+                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/search?query={searchRequest}");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
                 FillSearchCollection(jsonRequest);
@@ -35,14 +36,13 @@ namespace CoinCheck.ViewModel
         {
             JObject jsonObject = JObject.Parse(json);
             JArray coinsArray = (JArray)jsonObject["coins"];
-            searchCollection = coinsArray.ToObject<ObservableCollection<SearchCoinModel>>();
+            SearchCollection = coinsArray.ToObject<ObservableCollection<SearchCoinModel>>();
         }
 
         [ObservableProperty]
         private ObservableCollection<SearchCoinModel> searchCollection;
 
         [ObservableProperty]
-        private string request;
-
+        private string searchRequest;
     }
 }

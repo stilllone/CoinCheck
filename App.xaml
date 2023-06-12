@@ -18,5 +18,9 @@
         <DataTemplate DataType="{x:Type viewmodel:CurrencyDetailViewModel}">
             <infoview:CurrencyInfoView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:SearchViewModel}">
+            <view:SearchView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

@@ -28,9 +28,7 @@ namespace CoinCheck
             services.AddSingleton<TrendingViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<Func<Type, DataProvider.ViewModel>>(serviceProvider => viewModelType => (DataProvider.ViewModel)serviceProvider.GetRequiredService(viewModelType));
-            services.AddScoped<ICoinData, CoinInfoService>();
-
-
+            
 
             _serviceProvider = services.BuildServiceProvider();
         }

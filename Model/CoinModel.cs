@@ -39,14 +39,15 @@ namespace CoinCheck.Model
         [JsonProperty("market_cap")]
         [ObservableProperty]
         public long marketCap;
+
         [JsonProperty("market_cap_rank")]
         [ObservableProperty]
-
         public int marketCapRank;
+
         [JsonProperty("fully_diluted_valuation")]
         [ObservableProperty]
-
         public long fullyDilutedValuation;
+
         [JsonProperty("total_volume")]
         [ObservableProperty]
         public long totalVolume;
@@ -74,7 +75,5 @@ namespace CoinCheck.Model
         [JsonProperty("market_cap_change_percentage_24h")]
         [ObservableProperty]
         public decimal marketCapChangePercentage24h;
-
-
     }
 }

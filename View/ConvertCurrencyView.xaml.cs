@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoinCheck.View.InfoView
+namespace CoinCheck.View
 {
     /// <summary>
-    /// Interaction logic for ConvertView.xaml
+    /// Interaction logic for ConvertCurrencyView.xaml
     /// </summary>
-    public partial class ConvertView : UserControl
+    public partial class ConvertCurrencyView : UserControl
     {
-        public ConvertView()
+        public ConvertCurrencyView()
         {
             InitializeComponent();
         }

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -22,9 +23,11 @@ namespace CoinCheck.ViewModel
 {
     public partial class CurrencyDetailViewModel : DataProvider.ViewModel
     {
+        //coins/id
         public CurrencyDetailViewModel()
         {
             Task.Run(()=> GetDataForChart());
+            Task.Run(() => GetCoinDetailInfo());
 
             //chart
             var gradientBrush = new LinearGradientBrush
@@ -46,10 +49,10 @@ namespace CoinCheck.ViewModel
             XFormatter = val => new DateTime((long)val).ToString("dd");
             YFormatter = val => val.ToString("C");
         }
-        //coins/id
+        
 
         [ObservableProperty]
-        private string coinName;
+        private string coinName = "bitcoin";
         #region charts
         [ObservableProperty]
         private ZoomingOptions zoomingMode;
@@ -81,7 +84,7 @@ namespace CoinCheck.ViewModel
 
         [ObservableProperty]
         private ChartValues<DateTimePoint> chartData = new();
-        #endregion
+        
 
         private void FillChart(string? json)
         {
@@ -105,5 +108,43 @@ namespace CoinCheck.ViewModel
                     FillChart(jsonRequest);
             }
         }
+        #endregion
+
+        #region detailinfo
+
+        [ObservableProperty]
+        private ObservableCollection<Ticker> tickersCollection = new();
+
+        [ObservableProperty]
+        private MarketData marketDataItem = new();
+
+        private async void GetCoinDetailInfo()
+        {
+            using (HttpClient client = new())
+            {
+                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinName}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false");
+                response.EnsureSuccessStatusCode();
+                string? jsonRequest = await response.Content.ReadAsStringAsync();
+                if (jsonRequest != null)
+                {
+                    GetTickers(jsonRequest);
+                    GetPrice(jsonRequest);
+                }
+            }
+        }
+        private void GetTickers(string json)
+        {
+            JObject jsonObject = JObject.Parse(json);
+            JArray tickersArray = (JArray)jsonObject["tickers"];
+            TickersCollection = JsonConvert.DeserializeObject<ObservableCollection<Ticker>>(tickersArray.ToString());
+        }
+
+        private void GetPrice(string json)
+        {
+            JObject jsonObject = JObject.Parse(json);
+            var marketData = jsonObject["market_data"];
+            marketDataItem = marketData.ToObject<MarketData>();
+        }
+        #endregion
     }
 }

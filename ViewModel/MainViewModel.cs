@@ -24,6 +24,9 @@ namespace CoinCheck.ViewModel
         public void NavigateSearch() => Navigation.NavigateTo<SearchViewModel>();
 
         [RelayCommand]
+        public void NavigateConvert() => Navigation.NavigateTo<ConvertCoinViewModel>();
+
+        [RelayCommand]
         public void OnToggleHamburger() => IsHamburgerOpen = !IsHamburgerOpen;
 
         [ObservableProperty]

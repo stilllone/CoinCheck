@@ -24,5 +24,22 @@ namespace CoinCheck.View
         {
             InitializeComponent();
         }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string newText = textBox.Text.Insert(textBox.CaretIndex, e.Text);
+
+            if (!IsNumberWithComma(newText) || newText.StartsWith(","))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private bool IsNumberWithComma(string text)
+        {
+            return double.TryParse(text, out _);
+        }
+
     }
 }

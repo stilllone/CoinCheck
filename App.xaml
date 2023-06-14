@@ -25,6 +25,10 @@
             <DataTemplate DataType="{x:Type viewmodel:SearchViewModel}">
                 <view:SearchView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:ConvertCoinViewModel}">
+                <view:ConvertCurrencyView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

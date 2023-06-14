@@ -2,11 +2,30 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:uitext="clr-namespace:CoinCheck.View.UIElements"
+             d:DataContext="{d:DesignInstance Type=viewmodel:ConvertCoinViewModel, IsDesignTimeCreatable=True}"
              xmlns:local="clr-namespace:CoinCheck.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    
+    <Grid Style="{StaticResource BackGroundGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="{StaticResource SecondColor}" BorderThickness="1" CornerRadius="20" Height="130" Width="250">
+            <StackPanel>
+                <Label Style="{Binding}" Content="Currency converter" Height="30" Width="150" HorizontalContentAlignment="Center"/>
+                <TextBox Style="{StaticResource placeHolder}" Tag="Write a coin id.." Text="{Binding CoinId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" />
+                <TextBox Style="{StaticResource placeHolder}" Tag="How much? (1 by default)" Text="{Binding CoinCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" PreviewTextInput="TextBox_PreviewTextInput"/>
+                <Button Content="Convert" Command="{Binding ConvertCurrencyCommand}" Width="100" Margin="0 5 0 0"/>
+            </StackPanel>
+        </Border>
+        <ComboBox Grid.Column="1" Height="30" Width="70" ItemsSource="{Binding SupportedCurrencies}" SelectedItem="{Binding IntoCurrency}"/>
+        <TextBlock Grid.Column="1" Text="{Binding ConvertedCurrency, StringFormat=' 1 coin = {0}'}" TextAlignment="Center" Height="30" Width="150" Margin="0 100 0 0"/>
+
+        <TextBlock Grid.Column="1" Text="{Binding ConvertedResult}" TextAlignment="Center" Height="30" Width="150" Margin="0 150 0 0"/>
     </Grid>
 </UserControl>

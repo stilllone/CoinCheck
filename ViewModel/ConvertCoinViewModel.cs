@@ -1,11 +1,15 @@
 ﻿using CoinCheck.Model;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -23,7 +27,7 @@ namespace CoinCheck.ViewModel
             Task.Run(() => GetListOfSupportedCurrecies());
         }
         //need to update
-        public async void ConvertCurrency(string coinId, string intoCurrency)
+        private async void ConvertCurrencyAPI()
         {
             using (HttpClient client = new()
             {
@@ -31,18 +35,51 @@ namespace CoinCheck.ViewModel
             })
             {
                 client.DefaultRequestHeaders.Clear();
-                var response = await client.GetAsync($"simple/price?ids={coinId}&vs_currencies={intoCurrency}");
-                string? jsonRequest = await response.Content.ReadAsStringAsync();
-                var coin = JsonConvert.DeserializeObject<ConvertCoinModel>(jsonRequest);
-                convertedCurrency = coin.MainCoin.CurrencyConverted;
+                HttpResponseMessage response = null;
+                try
+                {
+                    response = await client.GetAsync($"simple/price?ids={CoinId}&vs_currencies={IntoCurrency.ToLower()}");
+                    response.EnsureSuccessStatusCode();
+                    string? jsonRequest = await response.Content.ReadAsStringAsync();
+                    ConvertCoinModel coin = JsonConvert.DeserializeObject<ConvertCoinModel>(jsonRequest, new CustomConverter());
+                    ConvertedCurrency = coin.MainCoin[IntoCurrency];
+                    ConvertedResult = $"{CoinCount} = {(long)CoinCount * (long)ConvertedCurrency}";
+                }
+                catch (HttpRequestException ex) when ((int)response?.StatusCode == 429)
+                {
+                    Debug.WriteLine("Too Many Requests. Please try again later.");
+                }
+                catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Debug.WriteLine("Endpoint not found.");
+                }
+                catch (HttpRequestException ex)
+                {
+                    Debug.WriteLine("An error occurred: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("An error occurred: " + ex.Message);
+                }
             }
+        }
+        [RelayCommand]
+        private void ConvertCurrency()
+        {
+            Task.Run(()=> ConvertCurrencyAPI());
         }
 
         [ObservableProperty]
         private string coinId;
 
+        [ObservableProperty]
+        private double coinCount;
+
         [ObservableProperty] 
-        private string intoCurrencyId;
+        private string intoCurrency;
+
+        [ObservableProperty] 
+        private string convertedResult;
 
         [ObservableProperty]
         private double convertedCurrency;
@@ -57,7 +94,7 @@ namespace CoinCheck.ViewModel
                 client.DefaultRequestHeaders.Clear();
                 var response = await client.GetAsync("https://api.coingecko.com/api/v3/simple/supported_vs_currencies");
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
-                supportedCurrencies = JsonConvert.DeserializeObject<List<string>>(jsonRequest);
+                SupportedCurrencies = JsonConvert.DeserializeObject<List<string>>(jsonRequest);
             }
         }
     }

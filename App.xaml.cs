@@ -36,6 +36,7 @@ namespace CoinCheck
             services.AddSingleton<TopCurrencyViewModel>();
             services.AddSingleton<TrendingViewModel>();
             services.AddSingleton<SearchViewModel>();
+            services.AddSingleton<ConvertCoinViewModel>();
 
             services.AddSingleton<CurrencyInfoView>(provider => new CurrencyInfoView
             {

@@ -63,6 +63,7 @@ namespace CoinCheck.ViewModel
                 }
             }
         }
+
         [RelayCommand]
         private void ConvertCurrency()
         {

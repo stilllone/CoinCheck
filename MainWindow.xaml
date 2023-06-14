@@ -44,7 +44,7 @@
                     <Button Style="{Binding }" Content="Search" Height="20" Width="Auto"
                             Command="{Binding NavigateSearchCommand}" />
 
-                    <Button Style="{Binding }" Content="Search" Height="20" Width="Auto"
+                    <Button Style="{Binding }" Content="Convert" Height="20" Width="Auto"
                             Command="{Binding NavigateConvertCommand}" />
                 </StackPanel>
 

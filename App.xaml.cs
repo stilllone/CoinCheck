@@ -38,10 +38,32 @@ namespace CoinCheck
             services.AddSingleton<SearchViewModel>();
             services.AddSingleton<ConvertCoinViewModel>();
 
-            services.AddSingleton<CurrencyInfoView>(provider => new CurrencyInfoView
+            //services.AddSingleton<CurrencyInfoView>(provider => new CurrencyInfoView
+            //{
+            //    DataContext = provider.GetRequiredService<CurrencyDetailViewModel>()
+            //});
+
+            services.AddSingleton<CurrencyInfoView>(provider =>
             {
-                DataContext = provider.GetRequiredService<CurrencyDetailViewModel>()
+                CurrencyInfoView currencyInfoView = new CurrencyInfoView();
+
+                // Get the current view model type from the provider
+                Type currentViewModelType = provider.GetService<DataProvider.ViewModel>().GetType();
+
+                if (currentViewModelType == typeof(CurrencyDetailViewModel))
+                {
+                    // Set the DataContext to CurrencyDetailViewModel
+                    currencyInfoView.DataContext = provider.GetRequiredService<CurrencyDetailViewModel>();
+                }
+                else if (currentViewModelType == typeof(ConvertCoinViewModel))
+                {
+                    // Set the DataContext to ConvertCoinViewModel
+                    currencyInfoView.DataContext = provider.GetRequiredService<ConvertCoinViewModel>();
+                }
+
+                return currencyInfoView;
             });
+
             services.AddTransient(provider =>
             {
                 IParameterService parameterService = provider.GetRequiredService<IParameterService>();

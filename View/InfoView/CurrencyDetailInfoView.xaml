@@ -27,7 +27,7 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0" BorderBrush="{StaticResource SecondColor}" BorderThickness="1" CornerRadius="20" Width="230" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center">
                         <StackPanel Margin="10 5 10 0" Height="150" Orientation="Vertical" >
-                            <uitext:UITextViewer LabelText="Current Price" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.Current_price.Usd}"/>
+                            <uitext:UITextViewer LabelText="Current Price" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.Current_price.Usd, StringFormat=' {0:N4} '}"/>
                             <uitext:UITextViewer LabelText="FDV" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.Fully_diluted_valuation.Usd}"/>
                             <uitext:UITextViewer LabelText="Total Volume" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.Total_volume.Usd}"/>
                             <uitext:UITextViewer LabelText="High 24h" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.High_24h.Usd}"/>
@@ -36,7 +36,7 @@
                     </Border>
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondColor}" Width="230" BorderThickness="1" CornerRadius="20" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" >
                         <StackPanel Margin="10 20 10 0" Height="150" Orientation="Vertical">
-                            <uitext:UITextViewer LabelText="Ath" TBText="{Binding MarketDataItem.Ath.Usd}"/>
+                            <uitext:UITextViewer LabelText="Ath" TBText="{Binding MarketDataItem.Ath.Usd, StringFormat=' {0:N4} '}"/>
                             <uitext:UITextViewer LabelText="Ath change %" TBText="{Binding MarketDataItem.Ath_change_percentage.Usd}"/>
                             <uitext:UITextViewer LabelText="Atl" TBText="{Binding MarketDataItem.Atl.Usd}"/>
                             <uitext:UITextViewer LabelText="Atl %" TBText="{Binding MarketDataItem.Atl_change_percentage.Usd}"/>
@@ -44,7 +44,7 @@
                     </Border>
                     <Border Grid.Column="2" BorderBrush="{StaticResource SecondColor}" Width="230" BorderThickness="1" CornerRadius="20" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" >
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10 20 0 0" Height="150">
-                            <uitext:UITextViewer LabelText="MC" TBText="{Binding MarketDataItem.Market_cap.Usd}"/>
+                            <uitext:UITextViewer LabelText="MC" TBText="{Binding MarketDataItem.Market_cap.Usd, StringFormat=' {0:N4} '}"/>
                             <uitext:UITextViewer LabelText="MC change 24h" TBText="{Binding MarketDataItem.Market_cap_change_24h}"/>
                             <uitext:UITextViewer LabelText="MC change 24h" TBText="{Binding MarketDataItem.Market_cap_change_percentage_24h}"/>
                             <uitext:UITextViewer LabelText="MC change 24h in curr"  TBText="{Binding MarketDataItem.Market_cap_change_24h_in_currency.Usd}"/>

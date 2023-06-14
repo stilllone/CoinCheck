@@ -1,4 +1,6 @@
-﻿using CoinCheck.Model;
+﻿using CoinCheck.Interfaces;
+using CoinCheck.Model;
+using CoinCheck.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
@@ -18,10 +20,19 @@ namespace CoinCheck.ViewModel
     {
         //https://api.coingecko.com/api/v3/search/trending
         //search/trending
-        public TrendingViewModel()
+        public TrendingViewModel(INavigationService navService, IParameterService paramService)
         {
+            Navigation = navService;
+            ParameterService = paramService;
+
             Task.Run(() => GetTrendingCoinsAsync());
         }
+
+        [ObservableProperty]
+        private INavigationService navigation;
+
+        [ObservableProperty]
+        private IParameterService parameterService;
 
         private async void GetTrendingCoinsAsync()
         {
@@ -49,6 +60,13 @@ namespace CoinCheck.ViewModel
             }
 
             return new ObservableCollection<TrendingModel>(trendingList);
+        }
+
+        [RelayCommand]
+        public void NavigateDetailInfo(string coinId)
+        {
+            ParameterService.SetParameter("CoinId", coinId);
+            Navigation.NavigateTo<CurrencyDetailViewModel>(coinId);
         }
 
         [ObservableProperty]

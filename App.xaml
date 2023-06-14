@@ -6,21 +6,25 @@
              xmlns:view="clr-namespace:CoinCheck.View" 
              xmlns:infoview="clr-namespace:CoinCheck.View.InfoView">
     <Application.Resources>
-        
-        <DataTemplate DataType="{x:Type viewmodel:TopCurrencyViewModel}">
-            <view:MainView/>
-        </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type viewmodel:TrendingViewModel}">
-            <view:TrendingView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Light.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodel:TopCurrencyViewModel}">
+                <view:MainView/>
+            </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewmodel:CurrencyDetailViewModel}">
-            <infoview:CurrencyInfoView/>
-        </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:TrendingViewModel}">
+                <view:TrendingView/>
+            </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewmodel:SearchViewModel}">
-            <view:SearchView/>
-        </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:CurrencyDetailViewModel}">
+                <infoview:CurrencyInfoView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:SearchViewModel}">
+                <view:SearchView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

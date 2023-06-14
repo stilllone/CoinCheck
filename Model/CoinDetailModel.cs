@@ -192,7 +192,7 @@ namespace CoinCheck.Model
     {
         [JsonProperty("name")]
         [ObservableProperty]
-        private string coinName;
+        private string marketName;
 
         [ObservableProperty]
         private string identifier;

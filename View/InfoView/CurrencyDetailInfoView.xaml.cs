@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,12 @@ namespace CoinCheck.View.InfoView
         public CurrencyDetailInfoView()
         {
             InitializeComponent();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            string uri = e.Uri.ToString();
+            Process.Start(new ProcessStartInfo(uri) { UseShellExecute = true });
         }
     }
 }

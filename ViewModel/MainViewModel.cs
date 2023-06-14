@@ -1,13 +1,7 @@
 ﻿using CoinCheck.Interfaces;
-using CoinCheck.View;
-using CoinCheck.View.InfoView;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace CoinCheck.ViewModel
 {
@@ -34,5 +28,6 @@ namespace CoinCheck.ViewModel
 
         [ObservableProperty]
         private bool isHamburgerOpen;
+
     }
 }

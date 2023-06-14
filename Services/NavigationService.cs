@@ -9,28 +9,21 @@ using System.Threading.Tasks;
 
 namespace CoinCheck.Services
 {
-    public class NavigationService : ObservableObject, INavigationService
+    public partial class NavigationService : ObservableObject, INavigationService
     {
-        private Func<Type, DataProvider.ViewModel> _viewModel;
-        public NavigationService(Func<Type, DataProvider.ViewModel> viewModel) 
+        private readonly Func<Type, DataProvider.ViewModel> _viewModelFactory;
+
+        public NavigationService(Func<Type, DataProvider.ViewModel> viewModelFactory)
         {
-            this._viewModel = viewModel;
+            _viewModelFactory = viewModelFactory;
         }
 
-        private DataProvider.ViewModel currentView;
-        public DataProvider.ViewModel CurrentView
-        {
-            get => currentView;
-            set
-            {
-                currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
-            }
-        }
+        [ObservableProperty]
+        private DataProvider.ViewModel _currentView = new();
 
-        public void NavigateTo<TViewModel>() where TViewModel : DataProvider.ViewModel
+        public void NavigateTo<TViewModel>(object parameter = null) where TViewModel : DataProvider.ViewModel
         {
-            DataProvider.ViewModel viewModel = _viewModel.Invoke(typeof(TViewModel));
+            DataProvider.ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
         }
     }

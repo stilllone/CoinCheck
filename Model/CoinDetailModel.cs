@@ -239,7 +239,7 @@ namespace CoinCheck.Model
         private string trust_score;
 
         [ObservableProperty]
-        private double bid_ask_spread_percentage;
+        private double? bid_ask_spread_percentage;
 
         [ObservableProperty]
         private DateTime timestamp;

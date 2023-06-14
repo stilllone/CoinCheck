@@ -5,15 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:control="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
-             d:DataContext="{d:DesignInstance Type=viewmodel:CurrencyDetailViewModel, IsDesignTimeCreatable=True}"
              xmlns:uc="clr-namespace:CoinCheck.View.InfoView"
+             d:DataContext="{d:DesignInstance Type=viewmodel:CurrencyDetailViewModel}"
              xmlns:local="clr-namespace:CoinCheck.View.InfoView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.DataContext>
-        <viewmodel:CurrencyDetailViewModel/>
-    </UserControl.DataContext>
     <Grid Background="AliceBlue">
         <control:MetroTabControl>
             <control:MetroTabItem Header="Info">

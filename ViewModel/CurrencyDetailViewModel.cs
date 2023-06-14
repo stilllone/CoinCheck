@@ -22,12 +22,14 @@ using static CoinCheck.Model.ChartModel;
 
 namespace CoinCheck.ViewModel
 {
-    public partial class CurrencyDetailViewModel : DataProvider.ViewModel
+    public partial class CurrencyDetailViewModel : DataProvider.ViewModel, IDisposable
     {
         //coins/id
-        public CurrencyDetailViewModel()
+        public CurrencyDetailViewModel(IParameterService paramService)
         {
 
+            ParamService = paramService;
+            this.CoinId = ReceiveParameter();
             //loading info
             Task.Run(()=> GetDataForChart());
             Task.Run(() => GetCoinDetailInfo());
@@ -52,10 +54,16 @@ namespace CoinCheck.ViewModel
             XFormatter = val => new DateTime((long)val).ToString("dd");
             YFormatter = val => val.ToString("C");
         }
-        
+
+        public string ReceiveParameter()
+        {
+            return ParamService.GetParameter<string>("CoinId");
+        }
 
         [ObservableProperty]
-        private string coinName;
+        private IParameterService paramService;
+        [ObservableProperty]
+        private string coinId;
         #region charts
         [ObservableProperty]
         private ZoomingOptions zoomingMode;
@@ -104,7 +112,7 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new())
             {
-                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinName}/market_chart?vs_currency=usd&days=7&interval=daily");
+                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}/market_chart?vs_currency=usd&days=7&interval=daily");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
                 if (jsonRequest != null)
@@ -125,7 +133,7 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new())
             {
-                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinName}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false");
+                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false");
                 response.EnsureSuccessStatusCode();
                 string? jsonRequest = await response.Content.ReadAsStringAsync();
                 if (jsonRequest != null)
@@ -146,7 +154,12 @@ namespace CoinCheck.ViewModel
         {
             JObject jsonObject = JObject.Parse(json);
             var marketData = jsonObject["market_data"];
-            marketDataItem = marketData.ToObject<MarketData>();
+            MarketDataItem = marketData.ToObject<MarketData>();
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
         #endregion
     }

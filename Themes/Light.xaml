@@ -37,4 +37,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+    <Style x:Key="BorderCard" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{StaticResource SecondColor}" />
+        <Setter Property="CornerRadius" Value="20"/>
+    </Style>
+    
+    
+    
+    
 </ResourceDictionary>

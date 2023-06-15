@@ -27,7 +27,8 @@ namespace CoinCheck.ViewModel
             Task.Run(() => GetListOfSupportedCurrecies());
         }
         //need to update
-        private async void ConvertCurrencyAPI()
+        [RelayCommand]
+        private async void ConvertCurrency()
         {
             using (HttpClient client = new()
             {
@@ -62,12 +63,6 @@ namespace CoinCheck.ViewModel
                     Debug.WriteLine("An error occurred: " + ex.Message);
                 }
             }
-        }
-
-        [RelayCommand]
-        private void ConvertCurrency()
-        {
-            Task.Run(()=> ConvertCurrencyAPI());
         }
 
         [ObservableProperty]

@@ -52,13 +52,15 @@ namespace CoinCheck
 
                 if (currentViewModelType == typeof(CurrencyDetailViewModel))
                 {
-                    // Set the DataContext to CurrencyDetailViewModel
                     currencyInfoView.DataContext = provider.GetRequiredService<CurrencyDetailViewModel>();
                 }
-                else if (currentViewModelType == typeof(ConvertCoinViewModel))
+                else if (currentViewModelType == typeof(TrendingViewModel))
                 {
-                    // Set the DataContext to ConvertCoinViewModel
-                    currencyInfoView.DataContext = provider.GetRequiredService<ConvertCoinViewModel>();
+                    currencyInfoView.DataContext = provider.GetRequiredService<TrendingViewModel>();
+                }
+                else if (currentViewModelType == typeof(SearchViewModel))
+                {
+                    currencyInfoView.DataContext = provider.GetRequiredService<SearchViewModel>();
                 }
 
                 return currencyInfoView;

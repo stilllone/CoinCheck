@@ -1,4 +1,6 @@
-﻿using CoinCheck.Model;
+﻿using CoinCheck.Interfaces;
+using CoinCheck.Model;
+using CoinCheck.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
@@ -20,6 +22,12 @@ namespace CoinCheck.ViewModel
         //search
         //need to adapt only for "coins"
 
+        public SearchViewModel(INavigationService navService, IParameterService paramService)
+        {
+            Navigation = navService;
+            ParameterService = paramService;
+        }
+
         [RelayCommand]
         private async void SearchCoin()
         {
@@ -31,6 +39,11 @@ namespace CoinCheck.ViewModel
                 FillSearchCollection(jsonRequest);
             }
         }
+
+        [ObservableProperty]
+        private INavigationService navigation;
+        [ObservableProperty]
+        private IParameterService parameterService;
 
         private void FillSearchCollection(string json)
         {
@@ -44,5 +57,12 @@ namespace CoinCheck.ViewModel
 
         [ObservableProperty]
         private string searchRequest;
+
+        [RelayCommand]
+        public void NavigateDetailInfo(string coinId)
+        {
+            ParameterService.SetParameter("CoinId", coinId);
+            Navigation.NavigateTo<CurrencyDetailViewModel>(coinId);
+        }
     }
 }

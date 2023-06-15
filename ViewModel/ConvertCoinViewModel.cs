@@ -25,6 +25,7 @@ namespace CoinCheck.ViewModel
         public ConvertCoinViewModel()
         {
             Task.Run(() => GetListOfSupportedCurrecies());
+            CoinCount = CoinCount == null ? 1 : CoinCount;
         }
         //need to update
         [RelayCommand]
@@ -69,7 +70,7 @@ namespace CoinCheck.ViewModel
         private string coinId;
 
         [ObservableProperty]
-        private double coinCount;
+        private double? coinCount;
 
         [ObservableProperty] 
         private string intoCurrency;

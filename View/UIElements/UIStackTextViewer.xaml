@@ -8,9 +8,8 @@
              >
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10 0 0 0">
-            <Label Content="{Binding LabelText, RelativeSource={RelativeSource AncestorType=local:UIStackTextViewer}}" HorizontalAlignment="Center" />
-            <TextBlock Text="{Binding TBText, RelativeSource={RelativeSource AncestorType=local:UIStackTextViewer}}" TextAlignment="Center"
-                       />
+            <Label Style="{StaticResource LabelStyle}" Content="{Binding LabelText, RelativeSource={RelativeSource AncestorType=local:UIStackTextViewer}}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource SecondTextBlock}" Text="{Binding TBText, RelativeSource={RelativeSource AncestorType=local:UIStackTextViewer}}" TextAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

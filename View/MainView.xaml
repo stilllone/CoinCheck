@@ -4,53 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:CoinCheck.View"
+             xmlns:uitext="clr-namespace:CoinCheck.View.UIElements"
              d:DataContext="{d:DesignInstance Type=viewmodel:TopCurrencyViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
+    <Grid Style="{StaticResource BackGroundGrid}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding TopCurrencyCollection}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="0 5 0 0" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" BorderBrush="Black" BorderThickness="0 1 0 1" Height="80">
+                                <Border Style="{StaticResource ScrollBorder}" Margin="0 5 0 0" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" BorderThickness="0 1.5 0 1.5" Height="80">
                                     <DockPanel VerticalAlignment="Stretch">
-                                        <TextBlock Text="{Binding MarketCapRank}" Height="30" Margin="10 0 10 0"/>
+                                        <TextBlock Style="{StaticResource SecondTextBlock}" Text="{Binding MarketCapRank}" Height="30" Margin="15 15 10 0"/>
                                         <Border  Width="35" Height="35" BorderThickness="1" CornerRadius="5">
                                             <Border.Background>
                                                 <ImageBrush ImageSource="{Binding Image}"/>
                                             </Border.Background>
                                         </Border>
-                                        <TextBlock Text="{Binding CoinName}" Width="60" Margin="10" TextAlignment="Center"/>
-                                        <TextBlock Text="{Binding Symbol}" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Width="60" Margin="-70 10 0 0"/>
+                                        <TextBlock  Text="{Binding CoinName}" Width="60" Margin="10 20 0 0" TextAlignment="Center"/>
+                                        <TextBlock Text="{Binding Symbol}" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Width="60" Margin="-70 20 0 0"/>
                                         <Grid Margin="0 5">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition MinWidth="120" Width="*"/>
+                                                <ColumnDefinition MinWidth="120" Width="*"/>
+                                                <ColumnDefinition MinWidth="120" Width="*"/>
+                                                <ColumnDefinition MinWidth="120" Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="40"/>
                                             </Grid.RowDefinitions>
-                                            <Label Content="24h %" Width="100" Height="80" Grid.Column="0" Grid.Row="0"  HorizontalContentAlignment="Center"/>
-                                            <TextBlock Text="{Binding PriceChangePercentage24h}" Width="100" Height="80" TextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+                                            <Label Style="{StaticResource LabelStyle}" Content="24h %" Width="100" Height="80" Grid.Column="0" Grid.Row="0"  HorizontalContentAlignment="Center" Margin="0 10 0 0"/>
+                                            <TextBlock Text="{Binding PriceChangePercentage24h}" Width="100" Height="80" TextAlignment="Center" Grid.Column="0" Grid.Row="1"  Margin="0 10 0 0"/>
 
-                                            <Label Content="High 24h" Width="100" Height="80" Grid.Column="1"  HorizontalContentAlignment="Center"/>
-                                            <TextBlock Text="{Binding High24h}" Width="100" Height="80" TextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+                                            <Label Style="{StaticResource LabelStyle}" Content="High 24h" Width="100" Height="80" Grid.Column="1"  HorizontalContentAlignment="Center"  Margin="0 10 0 0"/>
+                                            <TextBlock Text="{Binding High24h}" Width="100" Height="80" TextAlignment="Center" Grid.Column="1" Grid.Row="1"  Margin="0 10 0 0"/>
 
-                                            <Label Content="Low 24h" Width="100" Height="80" Grid.Column="2" HorizontalContentAlignment="Center"/>
-                                            <TextBlock Text="{Binding Low24h}" Width="100" Height="80" Grid.Column="2" TextAlignment="Center" Grid.Row="1"/>
+                                            <Label Style="{StaticResource LabelStyle}" Content="Low 24h" Width="100" Height="80" Grid.Column="2" HorizontalContentAlignment="Center"  Margin="0 10 0 0"/>
+                                            <TextBlock Text="{Binding Low24h}" Width="100" Height="80" Grid.Column="2" TextAlignment="Center" Grid.Row="1"  Margin="0 10 0 0"/>
 
-                                            <Label Content="Total Volume" Width="100" Height="80" Grid.Column="3"  HorizontalContentAlignment="Center"/>
-                                            <TextBlock Text="{Binding TotalVolume}" Width="100" Height="80" Grid.Column="3" TextAlignment="Center" Grid.Row="1"/>
+                                            <Label Style="{StaticResource LabelStyle}" Content="Total Volume" Width="100" Height="80" Grid.Column="3"  HorizontalContentAlignment="Center"  Margin="0 10 0 0"/>
+                                            <TextBlock Text="{Binding TotalVolume}" Width="100" Height="80" Grid.Column="3" TextAlignment="Center" Grid.Row="1"  Margin="0 10 0 0"/>
 
                                         </Grid>
-                                        <Button Command="{Binding DataContext.NavigateDetailInfoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Id}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0 0 10 0"/>
-                                        <TextBlock Text="{Binding CurrentPrice}"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"  DockPanel.Dock="Right" />
+                                        <Button Style="{StaticResource ButtonDetail}" Command="{Binding DataContext.NavigateDetailInfoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Id}"
+                                                Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0 0 10 0"/>
+                                        <uitext:UIStackTextViewer LabelText="Price" TBText="{Binding CurrentPrice}" VerticalAlignment="Center"   DockPanel.Dock="Right"/>
                                     </DockPanel>
                                 </Border>
                             </DataTemplate>

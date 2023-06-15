@@ -37,6 +37,6 @@ namespace CoinCheck.Model
         [ObservableProperty]
         private string? thumb;
 
-        public BitmapImage CoinImage => new(new Uri(thumb));
+        public BitmapImage? CoinImage => new(new Uri(thumb));
     }
 }

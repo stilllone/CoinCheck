@@ -110,11 +110,11 @@ namespace CoinCheck.Model
 
         [JsonProperty("market_cap")]
         [ObservableProperty]
-        public MarketCap market_cap;
+        public MarketCap? market_cap;
 
         [JsonProperty("market_cap_rank")]
         [ObservableProperty]
-        public int market_cap_rank;
+        public int? market_cap_rank;
 
         [JsonProperty("fully_diluted_valuation")]
         [ObservableProperty]

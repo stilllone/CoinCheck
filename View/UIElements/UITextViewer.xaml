@@ -12,8 +12,8 @@
                 <ColumnDefinition Width="105"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="{Binding LabelText, RelativeSource={RelativeSource AncestorType=local:UITextViewer}}" Grid.Column="0" />
-            <TextBlock Text="{Binding TBText, RelativeSource={RelativeSource AncestorType=local:UITextViewer}}"   Grid.Column="1"
+            <Label Style="{StaticResource LabelStyle}" Content="{Binding LabelText, RelativeSource={RelativeSource AncestorType=local:UITextViewer}}" Grid.Column="0" />
+            <TextBlock Style="{StaticResource SecondTextBlock}" Text="{Binding TBText, RelativeSource={RelativeSource AncestorType=local:UITextViewer}}"   Grid.Column="1"
                        TextAlignment="Right" VerticalAlignment="Center" HorizontalAlignment="Right" />
         </Grid>
     </Grid>

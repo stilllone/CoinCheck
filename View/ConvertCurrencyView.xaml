@@ -9,23 +9,31 @@
              xmlns:local="clr-namespace:CoinCheck.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <Grid Style="{StaticResource BackGroundGrid}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Background="{StaticResource SecondColor}" BorderThickness="1" CornerRadius="20" Height="130" Width="250">
-            <StackPanel>
-                <Label Style="{Binding}" Content="Currency converter" Height="30" Width="150" HorizontalContentAlignment="Center"/>
-                <TextBox Style="{StaticResource placeHolder}" Tag="Write a coin id.." Text="{Binding CoinId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" />
-                <TextBox Style="{StaticResource placeHolder}" Tag="How much? (1 by default)" Text="{Binding CoinCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" PreviewTextInput="TextBox_PreviewTextInput"/>
-                <Button Content="Convert" Command="{Binding ConvertCurrencyCommand}" Width="100" Margin="0 5 0 0"/>
-            </StackPanel>
-        </Border>
-        <ComboBox Grid.Column="1" Height="30" Width="70" ItemsSource="{Binding SupportedCurrencies}" SelectedItem="{Binding IntoCurrency}"/>
-        <TextBlock Grid.Column="1" Text="{Binding ConvertedCurrency, StringFormat=' 1 coin = {0}'}" TextAlignment="Center" Height="30" Width="150" Margin="0 100 0 0"/>
 
-        <TextBlock Grid.Column="1" Text="{Binding ConvertedResult}" TextAlignment="Center" Height="30" Width="150" Margin="0 150 0 0"/>
+    <Grid Style="{StaticResource BackGroundGrid}">
+        <Border Style="{StaticResource BorderCard}" Margin="100 0 100 0" CornerRadius="20" Height="170" MinWidth="230" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <DockPanel>
+                <Label Style="{StaticResource LabelAbout}" Content="Currency converter" HorizontalContentAlignment="Center" DockPanel.Dock="Top"/>
+                <DockPanel LastChildFill="True">
+                    <Border Style="{StaticResource BorderCardConvert}" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                        <StackPanel Margin="10 0 10 0" Orientation="Horizontal" Height="70" HorizontalAlignment="Center" >
+                            <uitext:UIStackTextBox LabelText="Coin Id" Height="50" MinWidth="100"
+                         TextBoxText="{Binding CoinId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <Button Style="{StaticResource ConvertButton}" Command="{Binding ConvertCurrencyCommand}" Width="50" Height="20"/>
+                            <uitext:UIStackTextBox LabelText="How much?" Height="50" MinWidth="100"
+                                       TextBoxText="{Binding CoinCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <ComboBox Style="{StaticResource ComboBoxFlatStyle}" Height="20" Width="70" ItemsSource="{Binding SupportedCurrencies}" SelectedItem="{Binding IntoCurrency}" Margin="10 18 0 0"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Height="30" MinWidth="150" Width="Auto" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
+                        <TextBlock Text="{Binding ConvertedCurrency, StringFormat=' 1 coin = {0}'}" TextAlignment="Center" Margin="0 0 130 0"/>
+                        <TextBlock Text="{Binding ConvertedResult}" Width="100" TextAlignment="Center"/>
+                    </StackPanel>
+                </DockPanel>
+
+            </DockPanel>
+        </Border>
+
     </Grid>
 </UserControl>

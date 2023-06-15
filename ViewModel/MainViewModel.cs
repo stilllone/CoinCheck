@@ -1,7 +1,9 @@
 ﻿using CoinCheck.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace CoinCheck.ViewModel
 {
@@ -32,5 +34,34 @@ namespace CoinCheck.ViewModel
         [ObservableProperty]
         private bool isHamburgerOpen;
 
+        private bool isDarkTheme;
+        public bool IsDarkTheme
+        {
+            get { return isDarkTheme; }
+            set
+            {
+                if (isDarkTheme != value)
+                {
+                    isDarkTheme = value;
+                    UpdateTheme();
+                    OnPropertyChanged(nameof(IsDarkTheme));
+                }
+            }
+        }
+        [RelayCommand]
+        private void UpdateTheme()
+        {
+            ResourceDictionary newThemeDictionary;
+            if (IsDarkTheme)
+            {
+                newThemeDictionary = new ResourceDictionary { Source = new Uri("Themes/Dark.xaml", UriKind.Relative) };
+            }
+            else
+            {
+                newThemeDictionary = new ResourceDictionary { Source = new Uri("Themes/Light.xaml", UriKind.Relative) };
+            }
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(newThemeDictionary);
+        }
     }
 }

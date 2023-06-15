@@ -14,7 +14,7 @@
         <helpers:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
     </Window.Resources>
 
-    <Grid Background="#606060">
+    <Grid Style="{StaticResource BackGroundGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
@@ -24,27 +24,25 @@
         </Grid.RowDefinitions>
         <ContentControl Content="{Binding Path = Navigation.CurrentView}" Grid.ColumnSpan="2" Grid.Row="0"/>
         <Button  Panel.ZIndex="1" Content="☰" x:Name="HamburgerButton" Height="30" Width="30" VerticalAlignment="Top"
-                Command="{Binding ToggleHamburgerCommand}" Grid.Column="0" HorizontalAlignment="Left"/>
-        <Border  Grid.Column="0" Grid.Row="1" Style="{Binding }"
+                Command="{Binding ToggleHamburgerCommand}" Grid.Column="1" HorizontalAlignment="Right"/>
+        <Border  Grid.Column="0" Grid.Row="1" Style="{StaticResource NavBorder}"
               Visibility="{Binding IsHamburgerOpen, Converter={StaticResource booleanToVisibilityConverter}}">
 
             <DockPanel LastChildFill="True" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                <StackPanel DockPanel.Dock="Bottom" Margin="10">
-                    <controls:ToggleSwitch Header="Theme"  Foreground="{Binding}"
-                        OffContent="Dark"
-                        OnContent="Light"/>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="10">
+                    <ToggleButton Height="20" Width="100" IsChecked="{Binding IsDarkTheme}" />
                 </StackPanel>
-                <StackPanel Margin="0 40 0 0" Orientation="Vertical">
-                    <Button Style="{Binding }" Content="Currencies" Height="20" Width="Auto" 
+                <StackPanel Margin="0 40 0 0" Orientation="Vertical" Width="125">
+                    <Button Style="{StaticResource NavigationButton}" Content="Currencies" Height="20" Width="Auto" Margin="0 10 0 0"
                             Command="{Binding NavigateCurrenciesCommand}" />
 
-                    <Button Style="{Binding }" Content="Trending" Height="20" Width="Auto"
+                    <Button Style="{StaticResource NavigationButton}" Content="Trending" Height="20" Width="Auto" Margin="0 10 0 0"
                             Command="{Binding NavigateTrendingCommand}" />
-                    
-                    <Button Style="{Binding }" Content="Search" Height="20" Width="Auto"
+
+                    <Button Style="{StaticResource NavigationButton}" Content="Search" Height="20" Width="Auto" Margin="0 10 0 0"
                             Command="{Binding NavigateSearchCommand}" />
 
-                    <Button Style="{Binding }" Content="Convert" Height="20" Width="Auto"
+                    <Button Style="{StaticResource NavigationButton}" Content="Convert" Height="20" Width="Auto" Margin="0 10 0 0"
                             Command="{Binding NavigateConvertCommand}" />
                 </StackPanel>
 

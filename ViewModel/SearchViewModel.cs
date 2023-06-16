@@ -1,21 +1,14 @@
 ﻿using CoinCheck.Helpers;
 using CoinCheck.Interfaces;
 using CoinCheck.Model;
-using CoinCheck.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Prism.Events;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoinCheck.ViewModel
 {

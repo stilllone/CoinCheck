@@ -1,7 +1,6 @@
 ﻿using CoinCheck.Helpers;
 using CoinCheck.Interfaces;
 using CoinCheck.Model;
-using CoinCheck.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
@@ -12,7 +11,6 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace CoinCheck.ViewModel
 {

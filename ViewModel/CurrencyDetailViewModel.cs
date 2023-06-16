@@ -1,7 +1,6 @@
 ﻿using CoinCheck.Helpers;
 using CoinCheck.Interfaces;
 using CoinCheck.Model;
-using CoinCheck.View.InfoView;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -12,16 +11,12 @@ using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
-using static CoinCheck.Model.ChartModel;
 
 namespace CoinCheck.ViewModel
 {

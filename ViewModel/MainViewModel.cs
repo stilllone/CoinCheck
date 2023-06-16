@@ -24,11 +24,15 @@ namespace CoinCheck.ViewModel
 
         private void ShowNotification(string message)
         {
-            var notificationView = new NotificationView();
-            var notificationViewModel = new NotificationViewModel();
-            notificationViewModel.NotificationText = message;
-            notificationView.DataContext = notificationViewModel;
-            this.Notification = notificationView;
+            var notificationViewModel = new NotificationViewModel
+            {
+                NotificationText = message
+            };
+
+            this.Notification = new NotificationView
+            {
+                DataContext = notificationViewModel
+            };
         }
 
         [ObservableProperty]

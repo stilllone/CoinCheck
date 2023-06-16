@@ -24,11 +24,15 @@ namespace CoinCheck.ViewModel
         //search
         //need to adapt only for "coins"
 
-        public SearchViewModel(INavigationService navService, IParameterService paramService)
+        public SearchViewModel(INavigationService navService, IParameterService paramService, IEventAggregator eventAggregator)
         {
             Navigation = navService;
             ParameterService = paramService;
+            EventAggregator = eventAggregator;
         }
+
+        [ObservableProperty]
+        private IEventAggregator eventAggregator;
 
         [RelayCommand]
         private async void SearchCoin()

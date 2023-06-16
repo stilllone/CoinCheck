@@ -4,6 +4,7 @@ using CoinCheck.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
+using Prism.Events;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -18,12 +19,16 @@ namespace CoinCheck.ViewModel
     {
         //https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en
         //coins/markets
-        public TopCurrencyViewModel(INavigationService navService, IParameterService paramService)
+        public TopCurrencyViewModel(INavigationService navService, IParameterService paramService, IEventAggregator eventAggregator)
         {
             Navigation = navService;
             ParameterService = paramService;
             Task.Run(() => GetCoinsAsync());
+            EventAggregator = eventAggregator;
         }
+
+        [ObservableProperty]
+        private IEventAggregator eventAggregator;
 
         [ObservableProperty]
         private INavigationService navigation;

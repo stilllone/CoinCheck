@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,10 +22,11 @@ namespace CoinCheck.ViewModel
     {
         //https://api.coingecko.com/api/v3/search/trending
         //search/trending
-        public TrendingViewModel(INavigationService navService, IParameterService paramService)
+        public TrendingViewModel(INavigationService navService, IParameterService paramService, IEventAggregator eventAggregator)
         {
-            Navigation = navService;
-            ParameterService = paramService;
+            this.Navigation = navService;
+            this.ParameterService = paramService;
+            EventAggregator = eventAggregator;
 
             Task.Run(() => GetTrendingCoinsAsync());
         }
@@ -34,6 +36,9 @@ namespace CoinCheck.ViewModel
 
         [ObservableProperty]
         private IParameterService parameterService;
+
+        [ObservableProperty]
+        private IEventAggregator eventAggregator;
 
         private async void GetTrendingCoinsAsync()
         {
@@ -86,7 +91,7 @@ namespace CoinCheck.ViewModel
         [RelayCommand]
         public void NavigateDetailInfo(string coinId)
         {
-            ParameterService.SetParameter("CoinId", coinId);
+            this.ParameterService.SetParameter("CoinId", coinId);
             Navigation.NavigateTo<CurrencyDetailViewModel>(coinId);
         }
 

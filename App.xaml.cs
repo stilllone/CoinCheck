@@ -6,6 +6,7 @@ using CoinCheck.View.InfoView;
 using CoinCheck.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Prism.Common;
+using Prism.Events;
 using System;
 using System.Linq;
 using System.Windows;
@@ -40,7 +41,8 @@ namespace CoinCheck
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
-            services.AddTransient<MainViewModel>();
+            services.AddSingleton<IEventAggregator, EventAggregator>();
+            services.AddSingleton<MainViewModel>();
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<TopCurrencyViewModel>();
             services.AddSingleton<TrendingViewModel>();
@@ -73,7 +75,8 @@ namespace CoinCheck
             services.AddTransient(provider =>
             {
                 IParameterService parameterService = provider.GetRequiredService<IParameterService>();
-                return new CurrencyDetailViewModel(parameterService);
+                IEventAggregator eventAggregator = provider.GetRequiredService<IEventAggregator>();
+                return new CurrencyDetailViewModel(parameterService, eventAggregator);
             });
             services.AddSingleton<INavigationService, Services.NavigationService>();
             services.AddSingleton<Func<Type, DataProvider.ViewModel>>(serviceProvider => viewModelType => (DataProvider.ViewModel)serviceProvider.GetRequiredService(viewModelType));

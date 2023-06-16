@@ -7,6 +7,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,10 +27,12 @@ namespace CoinCheck.ViewModel
     public partial class CurrencyDetailViewModel : DataProvider.ViewModel, IDisposable
     {
         //coins/id
-        public CurrencyDetailViewModel(IParameterService paramService)
+        public CurrencyDetailViewModel(IParameterService paramService, IEventAggregator eventAggregator)
         {
 
             ParamService = paramService;
+            EventAggregator = eventAggregator;
+
             this.CoinId = ReceiveParameter();
             //loading info
             Task.Run(()=> GetDataForChart());
@@ -55,6 +58,9 @@ namespace CoinCheck.ViewModel
             XFormatter = val => new DateTime((long)val).ToString("dd");
             YFormatter = val => val.ToString("C");
         }
+
+        [ObservableProperty]
+        private IEventAggregator eventAggregator;
 
         public string ReceiveParameter()
         {

@@ -1,9 +1,11 @@
-﻿using CoinCheck.Model;
+﻿using CoinCheck.Helpers;
+using CoinCheck.Model;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,12 +24,21 @@ namespace CoinCheck.ViewModel
         //https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=btc%2Ceth%2Cltc
         //simple/price
 
-        public ConvertCoinViewModel()
+        public ConvertCoinViewModel(IEventAggregator eventAggregator)
         {
             Task.Run(() => GetListOfSupportedCurrecies());
             CoinCount = CoinCount == null ? 1 : CoinCount;
+            EventAggregator = eventAggregator;
         }
-        //need to update
+
+        [ObservableProperty]
+        private IEventAggregator eventAggregator;
+
+        private void PublishNotification(string notificationText)
+        {
+            EventAggregator.GetEvent<NotificationEvent>().Publish(notificationText);
+        }
+
         [RelayCommand]
         private async void ConvertCurrency()
         {
@@ -49,19 +60,19 @@ namespace CoinCheck.ViewModel
                 }
                 catch (HttpRequestException ex) when ((int)response?.StatusCode == 429)
                 {
-                    Debug.WriteLine("Too Many Requests. Please try again later.");
+                    PublishNotification("Too Many Requests. Please try again later.");
                 }
                 catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
                 {
-                    Debug.WriteLine("Endpoint not found.");
+                    PublishNotification("Endpoint not found.");
                 }
                 catch (HttpRequestException ex)
                 {
-                    Debug.WriteLine("An error occurred: " + ex.Message);
+                    PublishNotification("An error occurred: " + ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("An error occurred: " + ex.Message);
+                    PublishNotification("An error occurred: " + ex.Message);
                 }
             }
         }

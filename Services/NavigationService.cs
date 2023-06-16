@@ -19,7 +19,7 @@ namespace CoinCheck.Services
         }
 
         [ObservableProperty]
-        private DataProvider.ViewModel _currentView = new();
+        private DataProvider.ViewModel currentView = new();
 
         public void NavigateTo<TViewModel>(object parameter = null) where TViewModel : DataProvider.ViewModel
         {

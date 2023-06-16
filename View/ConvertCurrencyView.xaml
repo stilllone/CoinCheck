@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:CoinCheck.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:uitext="clr-namespace:CoinCheck.View.UIElements"
-             d:DataContext="{d:DesignInstance Type=viewmodel:ConvertCoinViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=viewmodel:ConvertCoinViewModel}"
              xmlns:local="clr-namespace:CoinCheck.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">

@@ -1,21 +1,44 @@
-﻿using CoinCheck.Interfaces;
+﻿using CoinCheck.Helpers;
+using CoinCheck.Interfaces;
+using CoinCheck.View.UIElements;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Prism.Events;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation;
 
 namespace CoinCheck.ViewModel
 {
     public partial class MainViewModel : DataProvider.ViewModel
     {
-        public MainViewModel(INavigationService navService)
+       
+        public MainViewModel(INavigationService navService, IEventAggregator eventAggregator)
         {
             Navigation = navService;
+            EventAggregator = eventAggregator;
+            eventAggregator.GetEvent<NotificationEvent>().Subscribe(ShowNotification);
         }
+
+        [ObservableProperty]
+        private NotificationView notification;
+
+        private void ShowNotification(string message)
+        {
+            var notificationView = new NotificationView();
+            var notificationViewModel = new NotificationViewModel();
+            notificationViewModel.NotificationText = message;
+            notificationView.DataContext = notificationViewModel;
+            this.Notification = notificationView;
+        }
+
         [ObservableProperty]
         private INavigationService navigation;
+
+        [ObservableProperty]
+        private IEventAggregator eventAggregator;
 
         [RelayCommand]
         public void NavigateCurrencies() => Navigation.NavigateTo<TopCurrencyViewModel>();

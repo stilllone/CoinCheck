@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace CoinCheck.ViewModel
@@ -51,17 +52,8 @@ namespace CoinCheck.ViewModel
         [RelayCommand]
         private void UpdateTheme()
         {
-            ResourceDictionary newThemeDictionary;
-            if (IsDarkTheme)
-            {
-                newThemeDictionary = new ResourceDictionary { Source = new Uri("Themes/Dark.xaml", UriKind.Relative) };
-            }
-            else
-            {
-                newThemeDictionary = new ResourceDictionary { Source = new Uri("Themes/Light.xaml", UriKind.Relative) };
-            }
-            Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries.Add(newThemeDictionary);
+            var themeUri = IsDarkTheme ? new Uri("Themes/Dark.xaml", UriKind.Relative) : new Uri("Themes/Light.xaml", UriKind.Relative);
+            ((App)Application.Current).ChangeTheme(themeUri);
         }
     }
 }

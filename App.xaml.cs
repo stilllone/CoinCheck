@@ -18,30 +18,34 @@ namespace CoinCheck
     {
         private readonly ServiceProvider _serviceProvider;
 
+
+        public void ChangeTheme(Uri uri)
+        {
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            if (MainWindow != null)
+            {
+                var currentWindow = MainWindow;
+                currentWindow.Resources.MergedDictionaries.Clear();
+                currentWindow.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = uri });
+            }
+        }
         public App()
         {
             IServiceCollection services = new ServiceCollection();
 
             // register navigation 
-            services.AddScoped<MainWindow>(provider => new MainWindow
+            services.AddTransient<MainWindow>(provider => new MainWindow
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
-            services.AddSingleton<MainViewModel>();
-
+            services.AddTransient<MainViewModel>();
             services.AddSingleton<IParameterService, ParameterService>();
-
-
-
             services.AddSingleton<TopCurrencyViewModel>();
             services.AddSingleton<TrendingViewModel>();
             services.AddSingleton<SearchViewModel>();
             services.AddSingleton<ConvertCoinViewModel>();
-
-            //services.AddSingleton<CurrencyInfoView>(provider => new CurrencyInfoView
-            //{
-            //    DataContext = provider.GetRequiredService<CurrencyDetailViewModel>()
-            //});
 
             services.AddSingleton<CurrencyInfoView>(provider =>
             {

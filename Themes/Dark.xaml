@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks">
-    <SolidColorBrush x:Key="MainColor" Color="#faf9f9"/>
+    <SolidColorBrush x:Key="MainColor" Color="#3D474E"/>
     <SolidColorBrush x:Key="SecondColor" Color="#6ca434"/>
-    <SolidColorBrush x:Key="ThirdColor" Color="#E6F6D1"/>
-    <SolidColorBrush x:Key="ForegroundColor" Color="#787878"/>
+    <SolidColorBrush x:Key="ThirdColor" Color="#353d42"/>
+    <SolidColorBrush x:Key="ForegroundColor" Color="#c1b6ac"/>
     <SolidColorBrush x:Key="SecondForegroundColor" Color="#0d0b15"/>
     <SolidColorBrush x:Key="FifthColor" Color="Black"/>
-    <SolidColorBrush x:Key="FourthColor" Color="#f5f5dc"/>
+    <SolidColorBrush x:Key="FourthColor" Color="#535657"/>
     <SolidColorBrush x:Key="UnCheckedColorBrush" Color="#faf9f9" />
     <SolidColorBrush x:Key="CheckedColorBrush" Color="#0d0b15" />
 
@@ -62,6 +62,7 @@
         </Setter>
     </Style>
 
+
     <Style x:Key="BackGroundGrid" TargetType="{x:Type Grid}">
         <Setter Property="Background" Value="{StaticResource MainColor}"/>
     </Style>
@@ -94,13 +95,13 @@
             </Setter.Value>
         </Setter>
     </Style>
-     
+
     <Style x:Key="NavigationButton" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontFamily" Value="Themes/Fonts/AnaheimRegular.ttf"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="{StaticResource SecondForegroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -138,7 +139,7 @@
         <Setter Property="FontFamily" Value="Themes/Fonts/AnaheimRegular.ttf"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
-    
+
     <Style x:Key="BorderCard" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{StaticResource ThirdColor}" />
         <Setter Property="CornerRadius" Value="20"/>
@@ -152,14 +153,14 @@
         <Setter Property="BorderBrush" Value="{StaticResource ThirdColor}"/>
         <Setter Property="BorderThickness" Value="1.5"/>
     </Style>
-    
+
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="FontFamily" Value="Themes/Fonts/AnaheimRegular.ttf"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
     <Style x:Key="LabelAbout" TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{StaticResource SecondForegroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="FontFamily" Value="Themes/Fonts/AnaheimRegular.ttf #Anaheim"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
@@ -174,7 +175,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource SecondColor}"/>
     </Style>
 
-    
+
     <Style x:Key="textBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Themes/Fonts/AnaheimRegular.ttf"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>

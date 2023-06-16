@@ -9,6 +9,7 @@
 + Possibility of searching for currency by name or code.
 + Usage of MVVM, Prisms, etc.
 + Light / dark theme support.
+  
 ![image](https://github.com/stilllone/CoinCheck/assets/81475109/394f055b-3335-4da3-9ede-44ac04fa4f85)
 
 + Possibility to check a chart of coin in DetailInformation of Coin.

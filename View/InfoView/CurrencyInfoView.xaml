@@ -11,13 +11,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Style="{StaticResource BackGroundGrid}">
+    <Grid Style="{DynamicResource BackGroundGrid}">
         <control:MetroTabControl BorderThickness="0 0 1 0">
-            <control:MetroTabItem Style="{StaticResource TabItemBorder}" Margin="10 0 0 0" Width="34" Header="Info">
+            <control:MetroTabItem Style="{DynamicResource TabItemBorder}" Margin="10 0 0 0" Width="34" Header="Info">
                 <uc:CurrencyDetailInfoView/>
             </control:MetroTabItem>
 
-            <control:MetroTabItem Style="{StaticResource TabItemBorder}" Margin="15 0 0 0" Width="50" Header="Chart">
+            <control:MetroTabItem Style="{DynamicResource TabItemBorder}" Margin="15 0 0 0" Width="50" Header="Chart">
                 <uc:ChartView/>
             </control:MetroTabItem>
 

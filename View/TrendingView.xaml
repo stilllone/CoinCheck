@@ -9,15 +9,15 @@
              xmlns:local="clr-namespace:CoinCheck.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <Grid Style="{StaticResource BackGroundGrid}">
+
+    <Grid Style="{DynamicResource BackGroundGrid}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding TrendingCollection}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Style="{StaticResource ScrollBorder}" Margin="0 5 0 0" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
+                                <Border Style="{DynamicResource ScrollBorder}" Margin="0 5 0 0" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
                                         BorderThickness="0 1.5 0 1.5" Height="80">
                                     <DockPanel VerticalAlignment="Stretch">
                                         <TextBlock Text="{Binding RankInTrend}" Height="30" Margin="15 15 10 0"/>
@@ -41,11 +41,8 @@
                                             <uitex:UIStackTextViewer LabelText="Slug" TBText="{Binding Slug}" Grid.Column="3"/>
                                             <uitex:UIStackTextViewer LabelText="Price in BTC:" TBText="{Binding PriceBtc}" Grid.Column="4"/>
                                         </Grid>
-                                        
-                                        <Button Style="{StaticResource ButtonDetail}" Command="{Binding DataContext.NavigateDetailInfoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Id}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
 
-                                        
-
+                                        <Button Style="{DynamicResource ButtonDetail}" Command="{Binding DataContext.NavigateDetailInfoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Id}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
                                     </DockPanel>
                                 </Border>
                             </DataTemplate>

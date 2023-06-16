@@ -12,20 +12,20 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Style="{StaticResource BackGroundGrid}">
+    <Grid Style="{DynamicResource BackGroundGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <control:MetroTabControl Grid.Row="0" SelectedIndex="0">
-            <control:MetroTabItem Style="{StaticResource TabItemBorder}" Margin="10 0 0 0" Width="83" Header="Default info">
+            <control:MetroTabItem Style="{DynamicResource TabItemBorder}" Margin="10 0 0 0" Width="83" Header="Default info">
                 <Grid Margin="0 15 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="260" Width="*"/>
                         <ColumnDefinition MinWidth="260" Width="*"/>
                         <ColumnDefinition MinWidth="260" Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" BorderBrush="{StaticResource SecondColor}" BorderThickness="1" CornerRadius="20" Width="235" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <Border Grid.Column="0" BorderBrush="{DynamicResource SecondColor}" BorderThickness="1" CornerRadius="20" Width="235" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center">
                         <StackPanel Margin="10 5 10 0" MinHeight="150" Height="Auto" Orientation="Vertical" >
                             <uitext:UITextViewer LabelText="Current Price" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.Current_price.Usd, StringFormat=' {0:N2} '}"/>
                             <uitext:UITextViewer LabelText="FDV" HorizontalAlignment="Stretch" TBText="{Binding MarketDataItem.Fully_diluted_valuation.Usd}"/>

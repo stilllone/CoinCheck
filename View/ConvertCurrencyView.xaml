@@ -10,20 +10,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Style="{StaticResource BackGroundGrid}">
-        <Border Style="{StaticResource BorderCard}" Margin="100 0 100 0" CornerRadius="20" Height="170" MinWidth="230" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+    <Grid Style="{DynamicResource BackGroundGrid}">
+        <Border Style="{DynamicResource BorderCard}" Margin="100 0 100 0" CornerRadius="20" Height="170" MinWidth="230" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <DockPanel>
-                <Label Style="{StaticResource LabelAbout}" Content="Currency converter" HorizontalContentAlignment="Center" DockPanel.Dock="Top"/>
+                <Label Style="{DynamicResource LabelAbout}" Content="Currency converter" HorizontalContentAlignment="Center" DockPanel.Dock="Top"/>
                 <DockPanel LastChildFill="True">
-                    <Border Style="{StaticResource BorderCardConvert}" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                    <Border Style="{DynamicResource BorderCardConvert}" HorizontalAlignment="Center" DockPanel.Dock="Top">
                         <StackPanel Margin="10 0 10 0" Orientation="Horizontal" Height="70" HorizontalAlignment="Center" >
                             <uitext:UIStackTextBox LabelText="Coin Id" Height="50" MinWidth="100"
                          TextBoxText="{Binding CoinId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
-                            <Button Style="{StaticResource ConvertButton}" Command="{Binding ConvertCurrencyCommand}" Width="50" Height="20"/>
+                            <Button Style="{DynamicResource ConvertButton}" Command="{Binding ConvertCurrencyCommand}" Width="50" Height="20"/>
                             <uitext:UIStackTextBox LabelText="How much?" Height="50" MinWidth="100"
                                        TextBoxText="{Binding CoinCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                            <ComboBox Style="{StaticResource ComboBoxFlatStyle}" Height="20" Width="70" ItemsSource="{Binding SupportedCurrencies}" SelectedItem="{Binding IntoCurrency}" Margin="10 18 0 0"/>
+                            <ComboBox Style="{DynamicResource ComboBoxFlatStyle}" Height="20" Width="70" ItemsSource="{Binding SupportedCurrencies}" SelectedItem="{Binding IntoCurrency}" Margin="10 18 0 0"/>
                         </StackPanel>
                     </Border>
                     <StackPanel Orientation="Horizontal" Height="30" MinWidth="150" Width="Auto" HorizontalAlignment="Center" DockPanel.Dock="Bottom">

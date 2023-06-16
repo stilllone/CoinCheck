@@ -7,8 +7,8 @@
              mc:Ignorable="d">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label Style="{StaticResource LabelStyle}" Content="{Binding LabelText, RelativeSource={RelativeSource AncestorType=local:UIStackTextBox}}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" />
-            <TextBox Style="{StaticResource InputTextBox}" BorderThickness="0 0 0 1" Text="{Binding TextBoxText, RelativeSource={RelativeSource AncestorType=local:UIStackTextBox}}"/>
+            <Label Style="{DynamicResource LabelStyle}" Content="{Binding LabelText, RelativeSource={RelativeSource AncestorType=local:UIStackTextBox}}" HorizontalContentAlignment="Left" HorizontalAlignment="Center" />
+            <TextBox Style="{DynamicResource InputTextBox}" BorderThickness="0 0 0 1" Text="{Binding TextBoxText, RelativeSource={RelativeSource AncestorType=local:UIStackTextBox}}"/>
         </StackPanel>
     </Grid>
 </UserControl>

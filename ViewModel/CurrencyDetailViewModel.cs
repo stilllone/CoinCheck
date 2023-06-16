@@ -101,11 +101,31 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new())
             {
-                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}/market_chart?vs_currency=usd&days=14&interval=daily");
-                response.EnsureSuccessStatusCode();
-                string? jsonRequest = await response.Content.ReadAsStringAsync();
-                if (jsonRequest != null)
-                    FillChart(jsonRequest);
+                HttpResponseMessage response = null;
+                try
+                {
+                    response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}/market_chart?vs_currency=usd&days=14&interval=daily");
+                    response.EnsureSuccessStatusCode();
+                    string? jsonRequest = await response.Content.ReadAsStringAsync();
+                    if (jsonRequest != null)
+                        FillChart(jsonRequest);
+                }
+                catch (HttpRequestException ex) when ((int)response?.StatusCode == 429)
+                {
+                    Debug.WriteLine("Too Many Requests. Please try again later.");
+                }
+                catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Debug.WriteLine("Endpoint not found.");
+                }
+                catch (HttpRequestException ex)
+                {
+                    Debug.WriteLine("An http error occurred: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("An error occurred: " + ex.Message);
+                }
             }
         }
 

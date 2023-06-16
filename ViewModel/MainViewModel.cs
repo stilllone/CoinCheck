@@ -17,6 +17,7 @@ namespace CoinCheck.ViewModel
             Navigation = navService;
             EventAggregator = eventAggregator;
             eventAggregator.GetEvent<NotificationEvent>().Subscribe(ShowNotification);
+            Navigation.NavigateTo<TopCurrencyViewModel>();
         }
 
         [ObservableProperty]

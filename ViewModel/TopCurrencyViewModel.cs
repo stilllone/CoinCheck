@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -54,9 +55,13 @@ namespace CoinCheck.ViewModel
                 {
                     Debug.WriteLine("Too Many Requests. Please try again later.");
                 }
+                catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Debug.WriteLine("Endpoint not found.");
+                }
                 catch (HttpRequestException ex)
                 {
-                    Debug.WriteLine("An error occurred: " + ex.Message);
+                    Debug.WriteLine("An http error occurred: " + ex.Message);
                 }
                 catch (Exception ex)
                 {

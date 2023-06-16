@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -95,7 +96,18 @@ namespace CoinCheck.ViewModel
 
         [ObservableProperty]
         private ChartValues<DateTimePoint> chartData = new();
-        
+
+        private async void GetDataForChart()
+        {
+            using (HttpClient client = new())
+            {
+                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}/market_chart?vs_currency=usd&days=14&interval=daily");
+                response.EnsureSuccessStatusCode();
+                string? jsonRequest = await response.Content.ReadAsStringAsync();
+                if (jsonRequest != null)
+                    FillChart(jsonRequest);
+            }
+        }
 
         private void FillChart(string? json)
         {
@@ -108,17 +120,7 @@ namespace CoinCheck.ViewModel
             }
         }
 
-        private async void GetDataForChart()
-        {
-            using (HttpClient client = new())
-            {
-                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}/market_chart?vs_currency=usd&days=7&interval=daily");
-                response.EnsureSuccessStatusCode();
-                string? jsonRequest = await response.Content.ReadAsStringAsync();
-                if (jsonRequest != null)
-                    FillChart(jsonRequest);
-            }
-        }
+        
         #endregion
 
         #region detailinfo
@@ -133,13 +135,33 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new())
             {
-                var response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false");
-                response.EnsureSuccessStatusCode();
-                string? jsonRequest = await response.Content.ReadAsStringAsync();
-                if (jsonRequest != null)
+                HttpResponseMessage response = null;
+                try
                 {
-                    GetTickers(jsonRequest);
-                    GetPrice(jsonRequest);
+                    response = await client.GetAsync($"https://api.coingecko.com/api/v3/coins/{coinId}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false");
+                    response.EnsureSuccessStatusCode();
+                    string? jsonRequest = await response.Content.ReadAsStringAsync();
+                    if (jsonRequest != null)
+                    {
+                        GetTickers(jsonRequest);
+                        GetPrice(jsonRequest);
+                    }
+                }
+                catch (HttpRequestException ex) when ((int)response?.StatusCode == 429)
+                {
+                    Debug.WriteLine("Too Many Requests. Please try again later.");
+                }
+                catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Debug.WriteLine("Endpoint not found.");
+                }
+                catch (HttpRequestException ex)
+                {
+                    Debug.WriteLine("An http error occurred: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("An error occurred: " + ex.Message);
                 }
             }
         }

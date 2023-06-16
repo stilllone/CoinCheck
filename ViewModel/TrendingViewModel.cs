@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,10 +39,30 @@ namespace CoinCheck.ViewModel
         {
             using (HttpClient client = new HttpClient())
             {
-                var response = await client.GetAsync("https://api.coingecko.com/api/v3/search/trending");
-                response.EnsureSuccessStatusCode();
-                string? jsonRequest = await response.Content.ReadAsStringAsync();
-                TrendingCollection = FillCollection(jsonRequest);
+                HttpResponseMessage response = null;
+                try
+                {
+                    response = await client.GetAsync("https://api.coingecko.com/api/v3/search/trending");
+                    response.EnsureSuccessStatusCode();
+                    string? jsonRequest = await response.Content.ReadAsStringAsync();
+                    TrendingCollection = FillCollection(jsonRequest);
+                }
+                catch (HttpRequestException ex) when ((int)response?.StatusCode == 429)
+                {
+                    Debug.WriteLine("Too Many Requests. Please try again later.");
+                }
+                catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Debug.WriteLine("Endpoint not found.");
+                }
+                catch (HttpRequestException ex)
+                {
+                    Debug.WriteLine("An http error occurred: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("An error occurred: " + ex.Message);
+                }
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using CoinCheck.Interfaces;
+﻿using CoinCheck.Helpers;
+using CoinCheck.Interfaces;
 using CoinCheck.Model;
 using CoinCheck.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -39,6 +40,10 @@ namespace CoinCheck.ViewModel
 
         [ObservableProperty]
         private IEventAggregator eventAggregator;
+        private void PublishNotification(string notificationText)
+        {
+            EventAggregator.GetEvent<NotificationEvent>().Publish(notificationText);
+        }
 
         private async void GetTrendingCoinsAsync()
         {
@@ -54,19 +59,23 @@ namespace CoinCheck.ViewModel
                 }
                 catch (HttpRequestException ex) when ((int)response?.StatusCode == 429)
                 {
-                    Debug.WriteLine("Too Many Requests. Please try again later.");
+                    PublishNotification("Too Many Requests. Please try again later.");
                 }
                 catch (HttpRequestException ex) when (response.StatusCode == HttpStatusCode.NotFound)
                 {
-                    Debug.WriteLine("Endpoint not found.");
+                    PublishNotification("Endpoint not found.");
+                }
+                catch (NullReferenceException ex)
+                {
+                    PublishNotification("Something happened with data");
                 }
                 catch (HttpRequestException ex)
                 {
-                    Debug.WriteLine("An http error occurred: " + ex.Message);
+                    PublishNotification("An error occurred: " + ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("An error occurred: " + ex.Message);
+                    PublishNotification("An error occurred: " + ex.Message);
                 }
             }
         }

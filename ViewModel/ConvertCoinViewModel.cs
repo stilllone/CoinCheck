@@ -66,6 +66,10 @@ namespace CoinCheck.ViewModel
                 {
                     PublishNotification("Endpoint not found.");
                 }
+                catch (NullReferenceException)
+                {
+                    PublishNotification("Write some data");
+                }
                 catch (HttpRequestException ex)
                 {
                     PublishNotification("An error occurred: " + ex.Message);

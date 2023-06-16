@@ -22,9 +22,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ContentControl Content="{Binding Notification}" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-        <ContentControl Content="{Binding Path = Navigation.CurrentView}" Grid.ColumnSpan="2" Grid.Row="0"/>
         
+        <ContentControl Content="{Binding Path = Navigation.CurrentView}" Grid.ColumnSpan="2" Grid.Row="0"/>
+        <ContentControl Content="{Binding Notification}" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         <Button  Panel.ZIndex="1" Content="☰" x:Name="HamburgerButton" Height="30" Width="30" VerticalAlignment="Top"
                 Style="{DynamicResource NavigationButton}" Command="{Binding ToggleHamburgerCommand}" Grid.Column="1" HorizontalAlignment="Right"/>
         <Border  Grid.Column="0" Grid.Row="1" Style="{DynamicResource NavBorder}"
